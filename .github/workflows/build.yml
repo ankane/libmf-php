@@ -10,5 +10,5 @@ jobs:
         git clone https://github.com/cjlin1/libmf.git
         cd libmf
         make lib
-        cp libmf.2.dylib /usr/local/lib/libmf.dylib
+        cp libmf.so.2 /usr/local/lib/libmf.so
     - run: composer test
