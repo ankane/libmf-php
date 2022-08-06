@@ -10,5 +10,6 @@ jobs:
         git clone https://github.com/cjlin1/libmf.git
         cd libmf
         make lib
-        sudo cp libmf.so.2 /usr/local/lib/libmf.so
+        sudo cp libmf.so.2 /usr/lib/x86_64-linux-gnu/libmf.so
+        sudo ldconfig
     - run: composer test
