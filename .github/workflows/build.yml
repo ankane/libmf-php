@@ -1,0 +1,14 @@
+name: build
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: composer install
+    - run: |
+        git clone https://github.com/cjlin1/libmf.git
+        cd libmf
+        make lib
+        cp libmf.2.dylib /usr/local/lib/libmf.dylib
+    - uses: composer test
