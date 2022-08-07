@@ -98,7 +98,7 @@ new Libmf\Model(
     lambdaQ1: 0,            // coefficient of L1-norm regularization on Q
     lambdaQ2: 0.1,          // coefficient of L2-norm regularization on Q
     learningRate: 0.1,      // learning rate
-    alpha: 0.1,             // importance of negative entries
+    alpha: 1,               // importance of negative entries
     c: 0.0001,              // desired value of negative entries
     nmf: false,             // perform non-negative MF (NMF)
     quiet: false            // no outputs to stdout

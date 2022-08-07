@@ -15,7 +15,7 @@ class Model
         $lambdaQ1 = 0,
         $lambdaQ2 = 0.1,
         $learningRate = 0.1,
-        $alpha = 0.1,
+        $alpha = 1,
         $c = 0.0001,
         $nmf = false,
         $quiet = false
