@@ -33,8 +33,8 @@ class Problem
             }
         }
 
-        $prob->n = $n + 1;
         $prob->m = $m + 1;
+        $prob->n = $n + 1;
         $prob->nnz = $nnz;
         $prob->R = \FFI::addr($nodes[0]);
 

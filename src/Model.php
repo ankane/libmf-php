@@ -201,7 +201,7 @@ class Model
 
         // do_nmf must be true for generalized KL-divergence
         if ($param->fun == 2) {
-            $param->do_nmf = 2;
+            $param->do_nmf = true;
         }
 
         return $param;
