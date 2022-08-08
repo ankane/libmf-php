@@ -9,7 +9,6 @@
 Run:
 
 ```sh
-# TODO - not on Packagist yet
 composer require ankane/libmf
 ```
 
