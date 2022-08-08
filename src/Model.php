@@ -56,7 +56,7 @@ class Model
 
     public function predict($rowIndex, $columnIndex)
     {
-        return $this->ffi->mf_predict($this->model, $rowIndex, $columnIndex);
+        return $this->ffi->mf_predict($this->model(), $rowIndex, $columnIndex);
     }
 
     public function cv($data, $folds = 5)
@@ -72,7 +72,7 @@ class Model
 
     public function save($path)
     {
-        $status = $this->ffi->mf_save_model($this->model, $path);
+        $status = $this->ffi->mf_save_model($this->model(), $path);
         if ($status != 0) {
             throw new Exception("Cannot save model");
         }
@@ -95,74 +95,74 @@ class Model
 
     public function rows()
     {
-        return $this->model->m;
+        return $this->model()->m;
     }
 
     public function columns()
     {
-        return $this->model->n;
+        return $this->model()->n;
     }
 
     public function factors()
     {
-        return $this->model->k;
+        return $this->model()->k;
     }
 
     public function bias()
     {
-        return $this->model->b;
+        return $this->model()->b;
     }
 
     public function p()
     {
-        return $this->readFactors($this->model->P, $this->model->m);
+        return $this->readFactors($this->model()->P, $this->model()->m);
     }
 
     public function q()
     {
-        return $this->readFactors($this->model->Q, $this->model->n);
+        return $this->readFactors($this->model()->Q, $this->model()->n);
     }
 
     public function rmse($data)
     {
         $prob = new Problem($data);
-        return $this->ffi->calc_rmse($prob->addr(), $this->model);
+        return $this->ffi->calc_rmse($prob->addr(), $this->model());
     }
 
     public function mae($data)
     {
         $prob = new Problem($data);
-        return $this->ffi->calc_mae($prob->addr(), $this->model);
+        return $this->ffi->calc_mae($prob->addr(), $this->model());
     }
 
     public function gkl($data)
     {
         $prob = new Problem($data);
-        return $this->ffi->calc_gkl($prob->addr(), $this->model);
+        return $this->ffi->calc_gkl($prob->addr(), $this->model());
     }
 
     public function logloss($data)
     {
         $prob = new Problem($data);
-        return $this->ffi->calc_logloss($prob->addr(), $this->model);
+        return $this->ffi->calc_logloss($prob->addr(), $this->model());
     }
 
     public function accuracy($data)
     {
         $prob = new Problem($data);
-        return $this->ffi->calc_accuracy($prob->addr(), $this->model);
+        return $this->ffi->calc_accuracy($prob->addr(), $this->model());
     }
 
     public function mpr($data, $transpose)
     {
         $prob = new Problem($data);
-        return $this->ffi->calc_mpr($prob->addr(), $this->model, $transpose);
+        return $this->ffi->calc_mpr($prob->addr(), $this->model(), $transpose);
     }
 
     public function auc($data, $transpose)
     {
         $prob = new Problem($data);
-        return $this->ffi->calc_auc($prob->addr(), $this->model, $transpose);
+        return $this->ffi->calc_auc($prob->addr(), $this->model(), $transpose);
     }
 
     private function readFactors($ptr, $rows)
@@ -171,13 +171,21 @@ class Model
         $k = 0;
         for ($i = 0; $i < $rows; $i++) {
             $row = [];
-            for ($j = 0; $j < $this->model->k; $j++) {
+            for ($j = 0; $j < $this->model()->k; $j++) {
                 $row[] = $ptr[$k];
                 $k++;
             }
             $factors[] = $row;
         }
         return $factors;
+    }
+
+    private function model()
+    {
+        if (!isset($this->model)) {
+            throw new Exception('Not fit');
+        }
+        return $this->model;
     }
 
     private function param()

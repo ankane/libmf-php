@@ -46,6 +46,15 @@ final class ModelTest extends TestCase
         $this->assertNull($model->fit($this->generateData()));
     }
 
+    public function testNotFit()
+    {
+        $this->expectException(Libmf\Exception::class);
+        $this->expectExceptionMessage('Not fit');
+
+        $model = new Libmf\Model();
+        $model->bias();
+    }
+
     public function testNoData()
     {
         $this->expectException(Libmf\Exception::class);
