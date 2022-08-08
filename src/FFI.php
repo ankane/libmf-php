@@ -118,20 +118,9 @@ class FFI
                 mf_double calc_mpr(struct mf_problem *prob, struct mf_model *model, bool transpose);
 
                 mf_double calc_auc(struct mf_problem *prob, struct mf_model *model, bool transpose);
-            ', self::$lib ?? self::defaultLib());
+            ', self::$lib ?? Vendor::defaultLib());
         }
 
         return self::$instance;
-    }
-
-    private static function defaultLib()
-    {
-        if (PHP_OS == 'Windows') {
-            return 'mf.dll';
-        } elseif (PHP_OS == 'Darwin') {
-            return 'libmf.dylib';
-        } else {
-            return 'libmf.so';
-        }
     }
 }

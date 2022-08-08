@@ -24,6 +24,8 @@
         "phpunit/phpunit": "^9"
     },
     "scripts": {
-        "test": "phpunit tests"
+        "test": "phpunit tests",
+        "post-install-cmd": "Libmf\\Vendor::check",
+        "post-update-cmd": "Libmf\\Vendor::check"
     }
 }
