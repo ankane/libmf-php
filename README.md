@@ -2,6 +2,8 @@
 
 [LIBMF](https://github.com/cjlin1/libmf) - large-scale sparse matrix factorization - for PHP
 
+Check out [Disco](https://github.com/ankane/disco-php) for higher-level collaborative filtering
+
 [![Build Status](https://github.com/ankane/libmf-php/workflows/build/badge.svg?branch=master)](https://github.com/ankane/libmf-php/actions)
 
 ## Installation
