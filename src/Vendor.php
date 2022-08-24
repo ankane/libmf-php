@@ -4,12 +4,29 @@ namespace Libmf;
 
 class Vendor
 {
-    public const CHECKSUMS = [
-        'libmf.so'          => '5a22ec277a14ab8e3b8efacfec7fe57e5ac4192ea60e233d7e6db38db755a67e',
-        'libmf.arm64.so'    => '223ef5d1213b883c8cb8623bf07bf45167cd48585a5f2b59618cea034c72ad61',
-        'libmf.dylib'       => '6e3451feeded62a2e761647aef7c2a0e7dbeeee83ce8d4ab06586f5820f7ebf9',
-        'libmf.arm64.dylib' => '063c1dc39a6fda12ea2616d518fa319b8ab58faa65b174f176861cf8f8eaae0d',
-        'mf.dll'            => '8b0e53ab50ca3e2b365424652107db382dff47a26220c092b89729f9c3b8d7e7'
+    public const VERSION = 'master-2';
+
+    public const PLATFORMS = [
+        'x86_64-linux' => [
+            'file' => 'libmf.so',
+            'checksum' => '5a22ec277a14ab8e3b8efacfec7fe57e5ac4192ea60e233d7e6db38db755a67e'
+        ],
+        'aarch64-linux' => [
+            'file' => 'libmf.arm64.so',
+            'checksum' => '223ef5d1213b883c8cb8623bf07bf45167cd48585a5f2b59618cea034c72ad61'
+        ],
+        'x86_64-darwin' => [
+            'file' => 'libmf.dylib',
+            'checksum' => '6e3451feeded62a2e761647aef7c2a0e7dbeeee83ce8d4ab06586f5820f7ebf9'
+        ],
+        'arm64-darwin' => [
+            'file' => 'libmf.arm64.dylib',
+            'checksum' => '063c1dc39a6fda12ea2616d518fa319b8ab58faa65b174f176861cf8f8eaae0d'
+        ],
+        'x64-windows' => [
+            'file' => 'mf.dll',
+            'checksum' => '8b0e53ab50ca3e2b365424652107db382dff47a26220c092b89729f9c3b8d7e7'
+        ]
     ];
 
     public static function check($event)
@@ -28,11 +45,12 @@ class Vendor
         echo "Downloading LIBMF...\n";
 
         $file = self::libFile();
-        $url = "https://github.com/ankane/ml-builds/releases/download/libmf-master-2/$file";
+        $url = "https://github.com/ankane/ml-builds/releases/download/libmf-{{version}}/$file";
+        $url = str_replace('{{version}}', self::VERSION, $url);
         $contents = file_get_contents($url);
 
         $checksum = hash('sha256', $contents);
-        if ($checksum != self::CHECKSUMS[$file]) {
+        if ($checksum != self::platform('checksum')) {
             throw new Exception("Bad checksum: $checksum");
         }
 
@@ -53,19 +71,29 @@ class Vendor
 
     private static function libFile()
     {
+        return self::platform('file');
+    }
+
+    private static function platform($key)
+    {
+        return self::PLATFORMS[self::platformKey()][$key];
+    }
+
+    private static function platformKey()
+    {
         if (PHP_OS == 'Windows') {
-            return 'mf.dll';
+            return 'x64-windows';
         } elseif (PHP_OS == 'Darwin') {
             if (php_uname('m') == 'x86_64') {
-                return 'libmf.dylib';
+                return 'x86_64-darwin';
             } else {
-                return 'libmf.arm64.dylib';
+                return 'arm64-darwin';
             }
         } else {
             if (php_uname('m') == 'x86_64') {
-                return 'libmf.so';
+                return 'x86_64-linux';
             } else {
-                return 'libmf.arm64.so';
+                return 'aarch64-linux';
             }
         }
     }
