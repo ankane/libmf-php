@@ -81,9 +81,9 @@ class Vendor
 
     private static function platformKey()
     {
-        if (PHP_OS == 'Windows') {
+        if (PHP_OS_FAMILY == 'Windows') {
             return 'x64-windows';
-        } elseif (PHP_OS == 'Darwin') {
+        } elseif (PHP_OS_FAMILY == 'Darwin') {
             if (php_uname('m') == 'x86_64') {
                 return 'x86_64-darwin';
             } else {
