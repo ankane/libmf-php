@@ -45,8 +45,7 @@ class Vendor
         echo "Downloading LIBMF...\n";
 
         $file = self::libFile();
-        $url = "https://github.com/ankane/ml-builds/releases/download/libmf-{{version}}/$file";
-        $url = str_replace('{{version}}', self::VERSION, $url);
+        $url = self::withVersion("https://github.com/ankane/ml-builds/releases/download/libmf-{{version}}/$file");
         $contents = file_get_contents($url);
 
         $checksum = hash('sha256', $contents);
@@ -96,5 +95,10 @@ class Vendor
                 return 'aarch64-linux';
             }
         }
+    }
+
+    private static function withVersion($str)
+    {
+        return str_replace('{{version}}', self::VERSION, $str);
     }
 }
