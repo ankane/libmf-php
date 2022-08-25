@@ -88,6 +88,8 @@ $model->cv($data, 5);
 Pass parameters - default values below
 
 ```php
+use Libmf\Loss;
+
 new Libmf\Model(
     loss: Loss::RealL2,     // loss function
     factors: 8,             // number of latent factors
