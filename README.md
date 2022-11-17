@@ -14,6 +14,12 @@ Run:
 composer require ankane/libmf
 ```
 
+And download the shared library:
+
+```sh
+composer exec -- php -r "require 'vendor/autoload.php'; Libmf\Vendor::check(true);"
+```
+
 ## Getting Started
 
 Prep your data in the format `rowIndex, columnIndex, value`
