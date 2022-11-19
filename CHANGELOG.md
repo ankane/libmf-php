@@ -1,3 +1,7 @@
+## 0.1.2 (unreleased)
+
+- Fixed parse error with PHP < 8.1
+
 ## 0.1.1 (2022-08-24)
 
 - Added missing `ext-ffi` dependency
