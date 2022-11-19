@@ -1,4 +1,4 @@
-## 0.1.2 (unreleased)
+## 0.1.2 (2022-11-19)
 
 - Fixed parse error with PHP < 8.1
 
