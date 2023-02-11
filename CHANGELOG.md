@@ -1,3 +1,7 @@
+## 0.1.3 (unreleased)
+
+- Fixed warnings with PHP 8.2
+
 ## 0.1.2 (2022-11-19)
 
 - Fixed parse error with PHP < 8.1

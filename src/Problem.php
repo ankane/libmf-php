@@ -4,6 +4,10 @@ namespace Libmf;
 
 class Problem
 {
+    // TODO make private in 0.2.0
+    public $nodes;
+    public $prob;
+
     public function __construct($data)
     {
         $ffi = FFI::instance();

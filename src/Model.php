@@ -4,6 +4,24 @@ namespace Libmf;
 
 class Model
 {
+    // TODO make private in 0.2.0
+    public $loss;
+    public $factors;
+    public $threads;
+    public $bins;
+    public $iterations;
+    public $lambdaP1;
+    public $lambdaP2;
+    public $lambdaQ1;
+    public $lambdaQ2;
+    public $learningRate;
+    public $alpha;
+    public $c;
+    public $nmf;
+    public $quiet;
+    public $ffi;
+    public $model;
+
     public function __construct(
         $loss = Loss::RealL2,
         $factors = 8,
