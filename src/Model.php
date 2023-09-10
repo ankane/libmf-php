@@ -54,6 +54,12 @@ class Model
         $this->quiet = $quiet;
 
         $this->ffi = FFI::instance();
+        $this->model = null;
+    }
+
+    public function __destruct()
+    {
+        $this->destroyModel();
     }
 
     public function fit($trainSet, $validSet = null)
@@ -61,10 +67,10 @@ class Model
         $tr = new Problem($trainSet);
 
         if (is_null($validSet)) {
-            $this->model = $this->ffi->mf_train($tr->addr(), $this->param());
+            $this->setModel($this->ffi->mf_train($tr->addr(), $this->param()));
         } else {
             $va = new Problem($validSet);
-            $this->model = $this->ffi->mf_train_with_validation($tr->addr(), $va->addr(), $this->param());
+            $this->setModel($this->ffi->mf_train_with_validation($tr->addr(), $va->addr(), $this->param()));
         }
 
         if (is_null($this->model)) {
@@ -105,7 +111,7 @@ class Model
 
     private function load_model($path)
     {
-        $this->model = $this->ffi->mf_load_model($path);
+        $this->setModel($this->ffi->mf_load_model($path));
         if (is_null($this->model)) {
             throw new Exception("Cannot open model");
         }
@@ -200,10 +206,24 @@ class Model
 
     private function model()
     {
-        if (!isset($this->model)) {
+        if (is_null($this->model)) {
             throw new Exception('Not fit');
         }
         return $this->model;
+    }
+
+    private function setModel($model)
+    {
+        $this->destroyModel();
+        $this->model = $model;
+    }
+
+    private function destroyModel()
+    {
+        if (!is_null($this->model)) {
+            $this->ffi->mf_destroy_model(\FFI::addr($this->model));
+            $this->model = null;
+        }
     }
 
     private function param()
