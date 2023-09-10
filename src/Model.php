@@ -67,15 +67,17 @@ class Model
         $tr = new Problem($trainSet);
 
         if (is_null($validSet)) {
-            $this->setModel($this->ffi->mf_train($tr->addr(), $this->param()));
+            $model = $this->ffi->mf_train($tr->addr(), $this->param());
         } else {
             $va = new Problem($validSet);
-            $this->setModel($this->ffi->mf_train_with_validation($tr->addr(), $va->addr(), $this->param()));
+            $model = $this->ffi->mf_train_with_validation($tr->addr(), $va->addr(), $this->param());
         }
 
-        if (is_null($this->model)) {
+        if (is_null($model)) {
             throw new Exception("fit failed");
         }
+
+        $this->setModel($model);
     }
 
     public function predict($rowIndex, $columnIndex)
@@ -111,10 +113,11 @@ class Model
 
     private function load_model($path)
     {
-        $this->setModel($this->ffi->mf_load_model($path));
-        if (is_null($this->model)) {
+        $model = $this->ffi->mf_load_model($path);
+        if (is_null($model)) {
             throw new Exception("Cannot open model");
         }
+        $this->setModel($model);
     }
 
     public function rows()
