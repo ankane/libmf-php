@@ -1,4 +1,4 @@
-## 0.1.4 (unreleased)
+## 0.1.4 (2023-09-20)
 
 - Fixed garbage collection
 
