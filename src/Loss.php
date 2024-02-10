@@ -2,16 +2,15 @@
 
 namespace Libmf;
 
-// TODO use enum when PHP 8.0 reaches EOL
-class Loss
+enum Loss : int
 {
-    public const RealL2 = 0;
-    public const RealL1 = 1;
-    public const RealKL = 2;
-    public const BinaryLog = 5;
-    public const BinaryL2 = 6;
-    public const BinaryL1 = 7;
-    public const OneClassRow = 10;
-    public const OneClassCol = 11;
-    public const OneClassL2 = 12;
+    case RealL2 = 0;
+    case RealL1 = 1;
+    case RealKL = 2;
+    case BinaryLog = 5;
+    case BinaryL2 = 6;
+    case BinaryL1 = 7;
+    case OneClassRow = 10;
+    case OneClassCol = 11;
+    case OneClassL2 = 12;
 }

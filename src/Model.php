@@ -232,7 +232,7 @@ class Model
     private function param()
     {
         $param = $this->ffi->mf_get_default_param();
-        $param->fun = $this->loss;
+        $param->fun = $this->loss->value;
         $param->k = $this->factors;
         $param->nr_threads = $this->threads;
         $param->nr_bins = $this->bins;

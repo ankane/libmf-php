@@ -1,5 +1,6 @@
 ## 0.2.0 (unreleased)
 
+- Changed `Loss` to enum
 - Dropped support for PHP < 8.1
 
 ## 0.1.4 (2023-09-20)
