@@ -1,3 +1,7 @@
+## 0.2.0 (unreleased)
+
+- Dropped support for PHP < 8.1
+
 ## 0.1.4 (2023-09-20)
 
 - Fixed garbage collection
