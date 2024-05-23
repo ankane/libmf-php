@@ -4,7 +4,7 @@
 
 Check out [Disco](https://github.com/ankane/disco-php) for higher-level collaborative filtering
 
-[![Build Status](https://github.com/ankane/libmf-php/workflows/build/badge.svg?branch=master)](https://github.com/ankane/libmf-php/actions)
+[![Build Status](https://github.com/ankane/libmf-php/actions/workflows/build.yml/badge.svg)](https://github.com/ankane/libmf-php/actions)
 
 ## Installation
 
