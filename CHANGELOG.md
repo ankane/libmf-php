@@ -1,4 +1,4 @@
-## 0.2.0 (unreleased)
+## 0.2.0 (2024-06-02)
 
 - Changed `Loss` to enum
 - Dropped support for PHP < 8.1
