@@ -14,10 +14,19 @@ Run:
 composer require ankane/libmf
 ```
 
-And download the shared library:
+Add scripts to `composer.json` to download the shared library:
+
+```json
+    "scripts": {
+        "post-install-cmd": "Libmf\\Vendor::check",
+        "post-update-cmd": "Libmf\\Vendor::check"
+    }
+```
+
+And run:
 
 ```sh
-composer exec -- php -r "require 'vendor/autoload.php'; Libmf\Vendor::check();"
+composer install
 ```
 
 ## Getting Started
