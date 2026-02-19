@@ -56,11 +56,6 @@ class Model
         $this->model = null;
     }
 
-    public function __destruct()
-    {
-        $this->destroyModel();
-    }
-
     public function fit($trainSet, $validSet = null)
     {
         $tr = new Problem($trainSet);
@@ -211,21 +206,12 @@ class Model
         if (is_null($this->model)) {
             throw new Exception('Not fit');
         }
-        return $this->model;
+        return $this->model->ptr;
     }
 
     private function setModel($model)
     {
-        $this->destroyModel();
-        $this->model = $model;
-    }
-
-    private function destroyModel()
-    {
-        if (!is_null($this->model)) {
-            $this->ffi->mf_destroy_model(\FFI::addr($this->model));
-            $this->model = null;
-        }
+        $this->model = new Pointer($model, fn ($ptr) => $this->ffi->mf_destroy_model(\FFI::addr($ptr)));
     }
 
     private function param()
