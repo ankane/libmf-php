@@ -2,7 +2,7 @@
 
 namespace Libmf;
 
-enum Loss : int
+enum Loss: int
 {
     case RealL2 = 0;
     case RealL1 = 1;
