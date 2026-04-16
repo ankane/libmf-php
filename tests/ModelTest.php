@@ -55,7 +55,7 @@ final class ModelTest extends TestCase
         $validSet = new Libmf\Matrix();
         $validSet->push(1000000, 1000000, 1);
 
-        $model = new Libmf\Model(quiet: false, loss: Libmf\Loss::OneClassL2);
+        $model = new Libmf\Model(loss: Libmf\Loss::OneClassL2);
         $model->fit($trainSet, $validSet);
     }
 
