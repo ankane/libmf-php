@@ -34,6 +34,31 @@ final class ModelTest extends TestCase
         $this->assertNull($model->fit($trainSet, $validSet));
     }
 
+    public function testValidSetExtra()
+    {
+        $trainSet = $this->generateData();
+        $validSet = new Libmf\Matrix();
+        $validSet->push(10, 10, 1);
+
+        $model = new Libmf\Model(quiet: true);
+        $model->fit($trainSet, $validSet);
+        $this->assertEquals(5, $model->rows());
+        $this->assertEquals(4, $model->columns());
+    }
+
+    public function testValidSetExtraOneClassL2()
+    {
+        $this->expectException(Libmf\Exception::class);
+        $this->expectExceptionMessage('Extra indices in eval set not supported for OneClassL2 loss');
+
+        $trainSet = $this->generateData();
+        $validSet = new Libmf\Matrix();
+        $validSet->push(10, 10, 1);
+
+        $model = new Libmf\Model(quiet: true, loss: Libmf\Loss::OneClassL2);
+        $model->fit($trainSet, $validSet);
+    }
+
     public function testCv()
     {
         $model = new Libmf\Model(quiet: true);

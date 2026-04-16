@@ -5,7 +5,7 @@ namespace Libmf;
 class Problem
 {
     private $nodes;
-    private $prob;
+    public $prob;
 
     public function __construct($data)
     {
