@@ -38,7 +38,7 @@ final class ModelTest extends TestCase
     {
         $trainSet = $this->generateData();
         $validSet = new Libmf\Matrix();
-        $validSet->push(10, 10, 1);
+        $validSet->push(1000000, 1000000, 1);
 
         $model = new Libmf\Model(quiet: true);
         $model->fit($trainSet, $validSet);
@@ -53,9 +53,9 @@ final class ModelTest extends TestCase
 
         $trainSet = $this->generateData();
         $validSet = new Libmf\Matrix();
-        $validSet->push(10, 10, 1);
+        $validSet->push(1000000, 1000000, 1);
 
-        $model = new Libmf\Model(quiet: true, loss: Libmf\Loss::OneClassL2);
+        $model = new Libmf\Model(quiet: false, loss: Libmf\Loss::OneClassL2);
         $model->fit($trainSet, $validSet);
     }
 
