@@ -1,6 +1,7 @@
 ## 0.2.1 (unreleased)
 
 - Fixed memory leak in shared library
+- Dropped support for PHP < 8.2
 
 ## 0.2.0 (2024-06-02)
 
