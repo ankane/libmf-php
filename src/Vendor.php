@@ -4,28 +4,28 @@ namespace Libmf;
 
 class Vendor
 {
-    public const VERSION = 'master-2';
+    public const VERSION = '3d5570a';
 
     public const PLATFORMS = [
         'x86_64-linux' => [
             'file' => 'libmf.so',
-            'checksum' => '5a22ec277a14ab8e3b8efacfec7fe57e5ac4192ea60e233d7e6db38db755a67e'
+            'checksum' => '2197628cfff98ede7269edc191ec8b7ff6e04edd4d20088938637ddefa596f40'
         ],
         'aarch64-linux' => [
             'file' => 'libmf.arm64.so',
-            'checksum' => '223ef5d1213b883c8cb8623bf07bf45167cd48585a5f2b59618cea034c72ad61'
+            'checksum' => '99d315522ebd118318dad42ffeda08683cbdbd76c5e609cf7a494f9155feca2f'
         ],
         'x86_64-darwin' => [
             'file' => 'libmf.dylib',
-            'checksum' => '6e3451feeded62a2e761647aef7c2a0e7dbeeee83ce8d4ab06586f5820f7ebf9'
+            'checksum' => 'a6ea218370dbb489119e8a561089beea860a05ae0c30e58cc26d5f980d6cb8a2'
         ],
         'arm64-darwin' => [
             'file' => 'libmf.arm64.dylib',
-            'checksum' => '063c1dc39a6fda12ea2616d518fa319b8ab58faa65b174f176861cf8f8eaae0d'
+            'checksum' => 'fd88da76cb1b9cfdc02fc7dc14a61229195ae9fdf845c78ede7701bb72dfe4e2'
         ],
         'x64-windows' => [
             'file' => 'mf.dll',
-            'checksum' => '8b0e53ab50ca3e2b365424652107db382dff47a26220c092b89729f9c3b8d7e7'
+            'checksum' => 'c65eec5ef25482780f8b8f429d55d58ebf494288f84ccb689a2e7e88346fdc40'
         ]
     ];
 

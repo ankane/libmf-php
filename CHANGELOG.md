@@ -1,3 +1,7 @@
+## 0.2.1 (unreleased)
+
+- Fixed memory leak in shared library
+
 ## 0.2.0 (2024-06-02)
 
 - Changed `Loss` to enum
