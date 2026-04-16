@@ -11,8 +11,7 @@ class Problem
     {
         $ffi = FFI::instance();
 
-        $data = is_array($data) ? $data : $data->data;
-        $nnz = count($data);
+        $nnz = count($data->data);
         if ($nnz == 0) {
             throw new Exception('No data');
         }
@@ -23,7 +22,7 @@ class Problem
         $umax = -1;
         $vmax = -1;
         for ($i = 0; $i < $nnz; $i++) {
-            $row = $data[$i];
+            $row = $data->data[$i];
 
             $u = $row[0];
             if ($u < 0 || $u >= $intMax) {

@@ -45,8 +45,10 @@ final class ModelTest extends TestCase
         $this->expectException(Libmf\Exception::class);
         $this->expectExceptionMessage('Invalid row index');
 
+        $data = new Libmf\Matrix();
+        $data->push(-1, 0, 1);
         $model = new Libmf\Model(quiet: true);
-        $model->fit([[-1, 0, 1]]);
+        $model->fit($data);
     }
 
     public function testMaxRowIndex()
@@ -54,8 +56,10 @@ final class ModelTest extends TestCase
         $this->expectException(Libmf\Exception::class);
         $this->expectExceptionMessage('Invalid row index');
 
+        $data = new Libmf\Matrix();
+        $data->push(2**31 - 1, 0, 1);
         $model = new Libmf\Model(quiet: true);
-        $model->fit([[2**31 - 1, 0, 1]]);
+        $model->fit($data);
     }
 
     public function testNegativeColumnIndex()
@@ -63,8 +67,10 @@ final class ModelTest extends TestCase
         $this->expectException(Libmf\Exception::class);
         $this->expectExceptionMessage('Invalid column index');
 
+        $data = new Libmf\Matrix();
+        $data->push(0, -1, 1);
         $model = new Libmf\Model(quiet: true);
-        $model->fit([[0, -1, 1]]);
+        $model->fit($data);
     }
 
     public function testMaxColumnIndex()
@@ -72,8 +78,10 @@ final class ModelTest extends TestCase
         $this->expectException(Libmf\Exception::class);
         $this->expectExceptionMessage('Invalid column index');
 
+        $data = new Libmf\Matrix();
+        $data->push(0, 2**31 - 1, 1);
         $model = new Libmf\Model(quiet: true);
-        $model->fit([[0, 2**31 - 1, 1]]);
+        $model->fit($data);
     }
 
     public function testRealKL()
