@@ -11,29 +11,41 @@ class Problem
     {
         $ffi = FFI::instance();
 
-        $nnz = count($data->data);
+        $data = is_array($data) ? $data : $data->data;
+        $nnz = count($data);
         if ($nnz == 0) {
             throw new Exception("No data");
         }
 
         $prob = $ffi->new('struct mf_problem');
         $nodes = $ffi->new("struct mf_node[$nnz]");
-
+        $intMax = 2**31 - 1;
         $umax = -1;
         $vmax = -1;
         for ($i = 0; $i < $nnz; $i++) {
-            $row = $data->data[$i];
-            $node = $nodes[$i];
-            $node->u = $row[0];
-            $node->v = $row[1];
-            $node->r = $row[2];
+            $row = $data[$i];
 
-            if ($node->u > $umax) {
-                $umax = $node->u;
+            $u = $row[0];
+            if ($u < 0 || $u >= $intMax) {
+                throw new Exception('Invalid row index');
             }
-            if ($node->v > $vmax) {
-                $vmax = $node->v;
+
+            $v = $row[1];
+            if ($v < 0 || $v >= $intMax) {
+                throw new Exception('Invalid column index');
             }
+
+            if ($u > $umax) {
+                $umax = $u;
+            }
+            if ($v > $vmax) {
+                $vmax = $v;
+            }
+
+            $node = $nodes[$i];
+            $node->u = $u;
+            $node->v = $v;
+            $node->r = $row[2];
         }
 
         $prob->m = $umax + 1;

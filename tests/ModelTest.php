@@ -40,6 +40,42 @@ final class ModelTest extends TestCase
         $this->assertIsScalar($model->cv($this->generateData()));
     }
 
+    public function testNegativeRowIndex()
+    {
+        $this->expectException(Libmf\Exception::class);
+        $this->expectExceptionMessage('Invalid row index');
+
+        $model = new Libmf\Model(quiet: true);
+        $model->fit([[-1, 0, 1]]);
+    }
+
+    public function testMaxRowIndex()
+    {
+        $this->expectException(Libmf\Exception::class);
+        $this->expectExceptionMessage('Invalid row index');
+
+        $model = new Libmf\Model(quiet: true);
+        $model->fit([[2**31 - 1, 0, 1]]);
+    }
+
+    public function testNegativeColumnIndex()
+    {
+        $this->expectException(Libmf\Exception::class);
+        $this->expectExceptionMessage('Invalid column index');
+
+        $model = new Libmf\Model(quiet: true);
+        $model->fit([[0, -1, 1]]);
+    }
+
+    public function testMaxColumnIndex()
+    {
+        $this->expectException(Libmf\Exception::class);
+        $this->expectExceptionMessage('Invalid column index');
+
+        $model = new Libmf\Model(quiet: true);
+        $model->fit([[0, 2**31 - 1, 1]]);
+    }
+
     public function testRealKL()
     {
         $model = new Libmf\Model(quiet: true, loss: Libmf\Loss::RealKL);
