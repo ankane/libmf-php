@@ -68,7 +68,7 @@ class Model
         }
 
         if (is_null($model)) {
-            throw new Exception("fit failed");
+            throw new Exception('fit failed');
         }
 
         $this->setModel($model);
@@ -85,7 +85,7 @@ class Model
         // TODO update fork to differentiate between bad parameters and zero error
         $res = $this->ffi->mf_cross_validation($prob->addr(), $folds, $this->param());
         if ($res == 0) {
-            throw new Exception("cv failed");
+            throw new Exception('cv failed');
         }
         return $res;
     }
@@ -94,7 +94,7 @@ class Model
     {
         $status = $this->ffi->mf_save_model($this->model(), $path);
         if ($status != 0) {
-            throw new Exception("Cannot save model");
+            throw new Exception('Cannot save model');
         }
     }
 
@@ -109,7 +109,7 @@ class Model
     {
         $model = $this->ffi->mf_load_model($path);
         if (is_null($model)) {
-            throw new Exception("Cannot open model");
+            throw new Exception('Cannot open model');
         }
         $this->setModel($model);
     }

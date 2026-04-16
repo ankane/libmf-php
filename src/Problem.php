@@ -14,7 +14,7 @@ class Problem
         $data = is_array($data) ? $data : $data->data;
         $nnz = count($data);
         if ($nnz == 0) {
-            throw new Exception("No data");
+            throw new Exception('No data');
         }
 
         $prob = $ffi->new('struct mf_problem');
