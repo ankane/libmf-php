@@ -46,14 +46,27 @@ final class ModelTest extends TestCase
         $this->assertEquals(4, $model->columns());
     }
 
-    public function testValidSetExtraOneClassL2()
+    public function testValidSetExtraRowsOneClassL2()
     {
         $this->expectException(Libmf\Exception::class);
-        $this->expectExceptionMessage('Extra indices in eval set not supported for OneClassL2 loss');
+        $this->expectExceptionMessage('Eval set cannot have extra rows for OneClassL2 loss');
 
         $trainSet = $this->generateData();
         $validSet = new Libmf\Matrix();
-        $validSet->push(1000000, 1000000, 1);
+        $validSet->push(1000000, 1, 1);
+
+        $model = new Libmf\Model(loss: Libmf\Loss::OneClassL2);
+        $model->fit($trainSet, $validSet);
+    }
+
+    public function testValidSetExtraColumnsOneClassL2()
+    {
+        $this->expectException(Libmf\Exception::class);
+        $this->expectExceptionMessage('Eval set cannot have extra columns for OneClassL2 loss');
+
+        $trainSet = $this->generateData();
+        $validSet = new Libmf\Matrix();
+        $validSet->push(1, 1000000, 1);
 
         $model = new Libmf\Model(loss: Libmf\Loss::OneClassL2);
         $model->fit($trainSet, $validSet);

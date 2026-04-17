@@ -66,9 +66,15 @@ class Model
             $va = new Problem($validSet);
             $param = $this->param();
 
-            // LIBMF does not handle this case
-            if ($param->fun == 12 && ($va->prob->m > $tr->prob->m || $va->prob->n > $tr->prob->n)) {
-                throw new Exception('Extra indices in eval set not supported for OneClassL2 loss');
+            // LIBMF does not handle these cases
+            if ($param->fun == 12) {
+                if ($va->prob->m > $tr->prob->m) {
+                    throw new Exception('Eval set cannot have extra rows for OneClassL2 loss');
+                }
+
+                if ($va->prob->n > $tr->prob->n) {
+                    throw new Exception('Eval set cannot have extra columns for OneClassL2 loss');
+                }
             }
 
             $model = $this->ffi->mf_train_with_validation($tr->addr(), $va->addr(), $param);
