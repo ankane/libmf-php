@@ -1,5 +1,6 @@
-## 0.2.1 (unreleased)
+## 0.3.0 (unreleased)
 
+- Added checks for invalid data
 - Fixed memory leak in shared library
 - Dropped support for PHP < 8.2
 
